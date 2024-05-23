@@ -1,0 +1,25 @@
+Id	Level	Circuit	Input	Output	Type	Submodule Name
+1	Easy	a single-stage common-source amplifier with resistive load R	Vin	Vout	Amplifier	SingleStageAmp
+2	Easy	A three-stage amplifier with single input and output (each stage is common-source with resistive load)	Vin	Vout	Amplifier	ThreeStageAmp
+3	Easy	A common-drain amplifier (a.k.a. a source follower) with resistive load R (output Vout at the source)	Vin	Vout	Amplifier	CommonDrainAmp
+4	Easy	A single-stage common-gate amplifier with resistive load R (input signal Vin must be applied at the source terminal)	Vin, Vbias	Vout	Amplifier	CommonGateAmp
+5	Easy	A single-stage cascode amplifier with two NMOS transistors provides a single-ended output through a resistive load R	Vin, Vbias	Vout	Amplifier	SingleStageCascodeAmp
+6	Easy	A NMOS inverter with resistive load R	Vin	Vout	Inverter	NMOSInverter
+7	Easy	A logical inverter with 1 NMOS and 1 PMOS	Vin	Vout	Inverter	LogicalInverter
+8	Easy	A simple NMOS constant current source with resistive load R	Vbias	Vout	CurrentMirror	NMOSConstantCurrentSource
+9	Medium	A two-stage amplifier with a Miller compensation capacitor	Vin	Vout	Amplifier	TwoStageOpampMiller
+10	Medium	A single-stage amplifier (common-source with PMOS diode-connected load (gate and drain are shorted))	Vin	Vout	Amplifier	CommonSourceAmpDiodeLoad
+11	Medium	A differential opamp with an active PMOS current mirror load, a tail current source, and two outputs	Vinp, Vinn, Vbias	Voutp, Vout	Opamp	SingleStageOpamp
+12	Medium	A cascode current mirror with 4 mosfets (2 stacked at input side with diode-connected, 2 stacked at output side), reference current source input Iref (connected to Vdd) and resistive load R	Iref	Iout	CurrentMirror	CascodeCurrentMirror
+13	Medium	A single-stage differential common-source opamp with dual resistive loads, tail current, and a single output	Vinp, Vinn	Vout	Opamp	SingleStageDiffCommonSourceOpamp
+14	Hard	A two-stage differential opamp (first stage: common-source with an active load and a tail current, second stage: common-source with an active load)	Vinp, Vinn, Vbias1, Vbias2, Vbias3	Voutp, Vout	Opamp	OpampResistanceLoad
+15	Hard	A single-stage telescopic cascode opamp with two outputs (4 nmos as cascode input pair, 4 pmos as cascode loads, and 1 tail current)	Vinp, Vinn, Vbias1, Vbias2, Vbias3, Vbias4	Voutp, Vout	Opamp	SingleStageDiffOpamp
+16	Hard	An RC phase-shift oscillator	-	Vout	Oscillator	Unknown
+17	Hard	A Wien Bridge oscillator	-	Vout	Oscillator	Unknown
+18	Hard	An Opamp integrator with resistor R1 and capacitor Cf	Vin	Vout	Integrator	Unknown
+19	Hard	An Opamp differentiator with resistor Rf and capacitor C1	Vin	Vout	Differentiator	Unknown
+20	Hard	An Opamp adder to make Vout=-(Vin1+Vin2)	Vin1, Vin2	Vout	Adder	Unknown
+21	Hard	An Op-amp subtractor to make Vout=Vin2-Vin1	Vin1, Vin2	Vout	Subtractor	Unknown
+22	Hard	A non-inverting Schmitt trigger with positive feedback op-map	Vin	Vout	Schmitt	Unknown
+23	Hard	A voltage-controlled oscillator	Vin	Vout	VCO	Unknown
+24	Hard	A phase-locked loop	clk_ref	clk_p	PLL	Unknown

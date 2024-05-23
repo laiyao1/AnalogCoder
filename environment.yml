@@ -1,0 +1,12 @@
+name: analog
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - matplotlib
+  - pandas
+  - numpy
+  - scipy
+  - ollama
+  - openai
+  - pyspice==1.5
