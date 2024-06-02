@@ -19,7 +19,10 @@ The code implement for paper **AnalogCoder: Analog Circuit Design via Training-F
 Main advantages of AnalogCoder: 
 - AnalogCoder features a feedback-enhanced flow with crafted domain-specific prompts, enabling effective and automated design of analog circuits with a high success rate. 
 - It proposes a circuit skill library to archive successful designs as reusable modular sub-circuits, simplifying composite circuit creation. 
-- Extensive testing on a custom-designed benchmark of 24 analog circuit design tasks of varying difficulty shows that AnalogCoder successfully designed 20 circuits, outperforming existing methods. AnalogCoder can significantly improve the labor-intensive chip design process, enabling non-experts to efficiently design analog circuits.
+- Extensive testing on a custom-designed benchmark of 24 analog circuit design tasks of varying difficulty shows that AnalogCoder successfully designed 20 circuits, outperforming existing methods. 
+
+
+In summary, AnalogCoder can significantly improve the labor-intensive chip design process, enabling non-experts to efficiently design analog circuits.
 
 
 # Installation
