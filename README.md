@@ -1,7 +1,7 @@
 # AnalogCoder: Analog Circuit Design via Training-Free Code Generation
 
 <p align="center">
-  <img src="AnalogCoder_label.png" alt="alt text"width="150">
+  <img src="AnalogCoder_label.png" alt="alt text"width="100">
 </p>
 
 The code implement for paper **AnalogCoder: Analog Circuit Design via Training-Free Code Generation**. 
@@ -23,6 +23,35 @@ Main advantages of AnalogCoder:
 
 
 In summary, AnalogCoder can significantly improve the labor-intensive chip design process, enabling non-experts to efficiently design analog circuits.
+
+# Evaluation of LLMs
+| LLM Model               | Avg. Pass@1 | Avg. Pass@5 | # of Solved |
+|-------------------------|-------------|-------------|-------------|
+| Llama2-7B               | 0.0         | 0.0         | 0           |
+| Llama2-13B              | 0.0         | 0.0         | 0           |
+| Llama3-8B               | 0.1         | 0.7         | 1           |
+| CodeLlama-13B           | 0.6         | 2.5         | 2           |
+| Mistral-7B              | 3.3         | 7.7         | 2           |
+| Qwen-1.5-110B           | 0.3         | 1.4         | 2           |
+| Llama 2-70B             | 5.1         | 9.8         | 3           |
+| CodeLlama-7B            | 2.4         | 9.0         | 4           |
+| CodeLlama-34B           | 1.9         | 7.4         | 4           |
+| QwenCode-7B             | 1.1         | 5.6         | 4           |
+| DeepSeek-Coder-33B      | 4.0         | 10.2        | 4           |
+| Mixtral-8×7B            | 5.6         | 12.4        | 5           |
+| CodeLlama-70B           | 3.2         | 12.2        | 7           |
+| WizardCoder-33B         | 7.1         | 16.9        | 7           |
+| GPT-3.5 (w/o context)   | 8.1         | 18.5        | 7           |
+| GPT-3.5 (w/o CoT)       | 19.4        | 26.3        | 8           |
+| GPT-3.5 (w/o flow)      | 12.8        | 25.3        | 8           |
+| Codestral-22B           | 16.4        | 29.1        | 8           |
+| GPT-3.5 (SPICE)         | 13.9        | 26.9        | 9           |
+| GPT-3.5                 | 21.4        | 35.0        | 10          |
+| GPT-3.5 (fine-tune)     | 28.1        | 39.6        | 10          |
+| Llama3-70B              | 28.8        | 36.4        | 11          |
+| DeepSeek-V2             | 38.6        | 44.3        | 13          |
+| GPT-4o (w/o tool)       | 54.2        | 58.9        | 15          |
+| AnalogCoder             | 66.1        | 75.9        | 20          |
 
 
 # Installation
