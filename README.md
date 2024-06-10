@@ -54,6 +54,12 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | GPT-4o (w/o tool)       |             54.2 |             58.9 |              15 |
 | AnalogCoder             |             66.1 |             75.9 |              20 |
 
+Note:
+1. All our results are reproducible.
+2. The configuration of the environment does not require sudo privileges.
+
+
+
 # Installation
 AnalogCoder requires Python ≥ 3.10, PySpice ≥ 1.5, and openai >= 1.16.1. 
 
