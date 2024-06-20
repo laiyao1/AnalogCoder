@@ -11,7 +11,7 @@ The code implement for paper **AnalogCoder: Analog Circuit Design via Training-F
 # Introduction
 
 <p align="center">
-  <img src="teaser.png" alt="alt text"width="600">
+  <img src="teaser.png" alt="alt text"width="700">
 </p>
 
 **Analog circuit design** is a significant task in modern chip technology, focusing on selecting component types, connectivity, and parameters to ensure proper circuit functionality. Despite advances made by Large Language Models (LLMs) in digital circuit design, the **complexity** and **scarcity of data** in analog circuitry pose significant challenges. To mitigate these issues, we introduce **AnalogCoder**, the *first* training-free LLM agent for designing analog circuits that converts tasks into **Python code generation**. 
@@ -25,6 +25,9 @@ Main advantages of AnalogCoder:
 In summary, AnalogCoder can significantly improve the labor-intensive chip design process, enabling non-experts to efficiently design analog circuits.
 
 # Evaluation of LLMs
+
+**Ranking method**: # of solved (number of successfully solved circuit design problems) takes priority. If tied, higher average Pass@1 takes priority.
+
 | LLM Model               |      Avg. Pass@1 |      Avg. Pass@5 |     # of Solved |
 |-------------------------|-----------------:|-----------------:|----------------:|
 | Llama2-7B               |              0.0 |              0.0 |               0 |
@@ -50,6 +53,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | GPT-3.5                 |             21.4 |             35.0 |              10 |
 | GPT-3.5 (fine-tune)     |             28.1 |             39.6 |              10 |
 | Llama3-70B              |             28.8 |             36.4 |              11 |
+| Gemini-Pro-1.0              |             28.9 |             41.2 |              11 |
 | DeepSeek-V2-Chat             |             38.6 |             44.3 |              13 |
 | GPT-4o (w/o tool)       |             54.2 |             58.9 |              15 |
 | DeepSeek-V2-Coder             |             56.5 |             69.2 |              19 |
