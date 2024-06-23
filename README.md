@@ -53,9 +53,10 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | GPT-3.5                 |             21.4 |             35.0 |              10 |
 | GPT-3.5 (fine-tune)     |             28.1 |             39.6 |              10 |
 | Llama3-70B              |             28.8 |             36.4 |              11 |
-| Gemini-Pro-1.0              |             28.9 |             41.2 |              11 |
+| Gemini-1.0-Pro              |             28.9 |             41.2 |              11 |
 | DeepSeek-V2-Chat             |             38.6 |             44.3 |              13 |
 | GPT-4o (w/o tool)       |             54.2 |             58.9 |              15 |
+| Gemini-1.5-Pro             |             33.9 |             44.6 |              17 |
 | DeepSeek-V2-Coder             |             56.5 |             69.2 |              19 |
 | AnalogCoder             |             66.1 |             75.9 |              20 |
 
