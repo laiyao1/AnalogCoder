@@ -6,6 +6,12 @@
 
 The code implement for paper **AnalogCoder: Analog Circuit Design via Training-Free Code Generation**. 
 
+[Yao Lai](https://laiyao1.github.io/) <sup>1</sup>, [Sungyoung Lee](https://brianlsy98.github.io/) <sup>2</sup>, [Guojin Chen](https://gjchen.me/) <sup>3</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/) <sup>2</sup>, [Mengkang Hu](https://aaron617.github.io/) <sup>1</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/) <sup>2</sup>, [Ping Luo](http://luoping.me/) <sup>1</sup>.
+
+<sup>1</sup> The University of Hong Kong,
+<sup>2</sup> The University of Texas at Austin,
+<sup>3</sup> The Chinese University of Hong Kong.
+
 [[Paper](https://arxiv.org/pdf/2405.14918)]
 
 # Introduction
