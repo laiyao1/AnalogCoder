@@ -53,7 +53,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | CodeLlama-13B                          |              0.6 |              2.5 |               2 |
 | Mistral-7B                             |              3.3 |              7.7 |               2 |
 | Llama 2-70B                            |              5.1 |              9.8 |               3 |
-| QwenCode-7B                            |              1.1 |              5.6 |               4 |
+| CodeQwen-1.5-7B                        |              1.1 |              5.6 |               4 |
 | CodeLlama-34B                          |              1.9 |              7.4 |               4 |
 | CodeLlama-7B                           |              2.4 |              9.0 |               4 |
 | DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
@@ -82,7 +82,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 
 Note:
 1. All our results are reproducible.
-2. The configuration of the environment does not require sudo privileges.
+2. The configuration of the environment does NOT require sudo privileges.
 
 
 
