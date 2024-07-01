@@ -6,18 +6,29 @@
 
 The code implement for paper **AnalogCoder: Analog Circuit Design via Training-Free Code Generation**. 
 
-[Yao Lai](https://laiyao1.github.io/) <sup>1</sup>, [Sungyoung Lee](https://brianlsy98.github.io/) <sup>2</sup>, [Guojin Chen](https://gjchen.me/) <sup>3</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/) <sup>2</sup>, [Mengkang Hu](https://aaron617.github.io/) <sup>1</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/) <sup>2</sup>, [Ping Luo](http://luoping.me/) <sup>1</sup>.
+[Yao Lai](https://laiyao1.github.io/)<sup>1</sup>, [Sungyoung Lee](https://brianlsy98.github.io/)<sup>2</sup>, [Guojin Chen](https://gjchen.me/)<sup>3</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/)<sup>2</sup>, [Mengkang Hu](https://aaron617.github.io/)<sup>1</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/)<sup>2</sup>, [Ping Luo](http://luoping.me/)<sup>1</sup>.
 
 <sup>1</sup> The University of Hong Kong,
 <sup>2</sup> The University of Texas at Austin,
 <sup>3</sup> The Chinese University of Hong Kong.
+
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <a href="https://mmlab-hku.com/" target="_blank">
+    <img src="hkummlab.png" alt="Image 1" style="width: 30%;"/>
+  </a>
+  <a href="https://www.cerc.utexas.edu/utda/" target="_blank">
+    <img src="utda.jpg" alt="Image 2" style="width: 80%;"/>
+  </a>
+</div>
+
+
 
 [[Paper](https://arxiv.org/pdf/2405.14918)]
 
 # Introduction
 
 <p align="center">
-  <img src="teaser.png" alt="alt text"width="700">
+  <img src="teaser.png" alt="alt text"width="800">
 </p>
 
 **Analog circuit design** is a significant task in modern chip technology, focusing on selecting component types, connectivity, and parameters to ensure proper circuit functionality. Despite advances made by Large Language Models (LLMs) in digital circuit design, the **complexity** and **scarcity of data** in analog circuitry pose significant challenges. To mitigate these issues, we introduce **AnalogCoder**, the *first* training-free LLM agent for designing analog circuits that converts tasks into **Python code generation**. 
@@ -34,38 +45,41 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 
 **Ranking method**: # of solved (number of successfully solved circuit design problems) takes priority. If tied, higher average Pass@1 takes priority.
 
-| LLM Model               |      Avg. Pass@1 |      Avg. Pass@5 |     # of Solved |
-|-------------------------|-----------------:|-----------------:|----------------:|
-| Llama2-7B               |              0.0 |              0.0 |               0 |
-| Llama2-13B              |              0.0 |              0.0 |               0 |
-| Llama3-8B               |              0.1 |              0.7 |               1 |
-| Qwen-1.5-110B           |              0.3 |              1.4 |               2 |
-| CodeLlama-13B           |              0.6 |              2.5 |               2 |
-| Mistral-7B              |              3.3 |              7.7 |               2 |
-| Llama 2-70B             |              5.1 |              9.8 |               3 |
-| QwenCode-7B             |              1.1 |              5.6 |               4 |
-| CodeLlama-34B           |              1.9 |              7.4 |               4 |
-| CodeLlama-7B            |              2.4 |              9.0 |               4 |
-| DeepSeek-Coder-33B      |              4.0 |             10.2 |               4 |
-| Mixtral-8×7B            |              5.6 |             12.4 |               5 |
-| CodeLlama-70B           |              3.2 |             12.2 |               7 |
-| WizardCoder-33B         |              7.1 |             16.9 |               7 |
-| GPT-3.5 (w/o context)   |              8.1 |             18.5 |               7 |
-| GPT-3.5 (w/o flow)      |             12.8 |             25.3 |               8 |
-| Codestral-22B           |             16.4 |             29.1 |               8 |
-| GPT-3.5 (w/o CoT)       |             19.4 |             26.3 |               8 |
-| GLM-4                   |             22.8 |             31.2 |               8 |
-| GPT-3.5 (SPICE)         |             13.9 |             26.9 |               9 |
-| GPT-3.5                 |             21.4 |             35.0 |              10 |
-| GPT-3.5 (fine-tune)     |             28.1 |             39.6 |              10 |
-| Llama3-70B              |             28.8 |             36.4 |              11 |
-| Gemini-1.0-Pro              |             28.9 |             41.2 |              11 |
-| Gemini-1.5-Flash              |             35.7 |             40.6 |              11 |
-| DeepSeek-V2-Chat             |             38.6 |             44.3 |              13 |
-| GPT-4o (w/o tool)       |             54.2 |             58.9 |              15 |
-| Gemini-1.5-Pro             |             33.9 |             44.6 |              17 |
-| DeepSeek-V2-Coder             |             56.5 |             69.2 |              19 |
-| AnalogCoder             |             66.1 |             75.9 |              20 |
+| LLM Model                              |      Avg. Pass@1 |      Avg. Pass@5 |     # of Solved |
+|----------------------------------------|-----------------:|-----------------:|----------------:|
+| Llama2-7B                              |              0.0 |              0.0 |               0 |
+| Llama2-13B                             |              0.0 |              0.0 |               0 |
+| Llama3-8B                              |              0.1 |              0.7 |               1 |
+| Qwen-1.5-110B                          |              0.3 |              1.4 |               2 |
+| CodeLlama-13B                          |              0.6 |              2.5 |               2 |
+| Mistral-7B                             |              3.3 |              7.7 |               2 |
+| Llama 2-70B                            |              5.1 |              9.8 |               3 |
+| QwenCode-7B                            |              1.1 |              5.6 |               4 |
+| CodeLlama-34B                          |              1.9 |              7.4 |               4 |
+| CodeLlama-7B                           |              2.4 |              9.0 |               4 |
+| DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
+| Mixtral-8×7B                           |              5.6 |             12.4 |               5 |
+| CodeLlama-70B                          |              3.2 |             12.2 |               7 |
+| WizardCoder-33B                        |              7.1 |             16.9 |               7 |
+| GPT-3.5 (w/o context)                  |              8.1 |             18.5 |               7 |
+| GPT-3.5 (w/o flow)                     |             12.8 |             25.3 |               8 |
+| Codestral-22B                          |             16.4 |             29.1 |               8 |
+| GPT-3.5 (w/o CoT)                      |             19.4 |             26.3 |               8 |
+| GLM-4                                  |             22.8 |             31.2 |               8 |
+| GPT-3.5 (SPICE)                        |             13.9 |             26.9 |               9 |
+| GPT-3.5                                |             21.4 |             35.0 |              10 |
+| GPT-3.5 (fine-tune)                    |             28.1 |             39.6 |              10 |
+| Llama3-70B                             |             28.8 |             36.4 |              11 |
+| Gemini-1.0-Pro                         |             28.9 |             41.2 |              11 |
+| Gemini-1.5-Flash                       |             35.7 |             40.6 |              11 |
+| DeepSeek-V2-Chat                       |             38.6 |             44.3 |              13 |
+| GPT-4 (w/o tool)                       |             51.1 |             57.7 |              14 |
+| GPT-4o (w/o tool)                      |             54.2 |             58.9 |              15 |
+| Claude-3.5-Sonnet (w/o tool)           |             58.1 |             60.7 |              15 |
+| Gemini-1.5-Pro                         |             33.9 |             44.6 |              17 |
+| DeepSeek-V2-Coder                      |             56.5 |             69.2 |              19 |
+| AnalogCoder (GPT 4o-based)             |             66.1 |             75.9 |              20 |
+| AnalogCoder (Claude 3.5 Sonnet-based)  |             76.1 |             86.3 |              22 |
 
 Note:
 1. All our results are reproducible.
