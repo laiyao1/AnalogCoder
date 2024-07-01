@@ -12,14 +12,13 @@ The code implement for paper **AnalogCoder: Analog Circuit Design via Training-F
 <sup>2</sup> The University of Texas at Austin,
 <sup>3</sup> The Chinese University of Hong Kong.
 
-<div style="display: flex; justify-content: center; gap: 10px;">
   <a href="https://mmlab-hku.com/" target="_blank">
     <img src="hkummlab.png" alt="Image 1" style="width: 30%;"/>
   </a>
+
   <a href="https://www.cerc.utexas.edu/utda/" target="_blank">
-    <img src="utda.jpg" alt="Image 2" style="width: 80%;"/>
+    <img src="utda.jpg" alt="Image 2" style="width: 20%;"/>
   </a>
-</div>
 
 
 
