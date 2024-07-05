@@ -59,6 +59,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
 | Mixtral-8×7B                           |              5.6 |             12.4 |               5 |
 | CodeLlama-70B                          |              3.2 |             12.2 |               7 |
+| CodeGemma-7B                          |              6.9 |             17.0 |               7 |
 | WizardCoder-33B                        |              7.1 |             16.9 |               7 |
 | GPT-3.5 (w/o context)                  |              8.1 |             18.5 |               7 |
 | GPT-3.5 (w/o flow)                     |             12.8 |             25.3 |               8 |
