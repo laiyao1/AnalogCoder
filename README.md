@@ -48,6 +48,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 |----------------------------------------|-----------------:|-----------------:|----------------:|
 | Llama2-7B                              |              0.0 |              0.0 |               0 |
 | Llama2-13B                             |              0.0 |              0.0 |               0 |
+| SemiKong-8B*                            |              0.1 |              0.7 |               1 |
 | Llama3-8B                              |              0.1 |              0.7 |               1 |
 | Phi3-14B                               |              0.3 |              1.3 |               1 |
 | Qwen-1.5-110B                          |              0.3 |              1.4 |               2 |
@@ -60,6 +61,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
 | Mixtral-8×7B                           |              5.6 |             12.4 |               5 |
 | StarCoder2-15B-Instuct                 |              5.6 |             12.4 |               5 |
+| CodeGeeX4-9B*                 |              10.6 |             20.3 |               6 |
 | CodeLlama-70B                          |              3.2 |             12.2 |               7 |
 | CodeGemma-7B                           |              6.9 |             17.0 |               7 |
 | WizardCoder-33B                        |              7.1 |             16.9 |               7 |
@@ -84,9 +86,13 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | AnalogCoder (GPT 4o-based)             |             66.1 |             75.9 |              20 |
 | AnalogCoder (Claude 3.5 Sonnet-based)  |             76.1 |             86.3 |              22 |
 
+\* without CoT (prompt to directly generate codes rather than devices) due to token limitations or its primary design for code generation.
+
+
 Note:
 1. All our results are reproducible.
 2. The configuration of the environment does NOT require sudo privileges.
+
 
 
 
