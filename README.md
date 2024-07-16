@@ -59,6 +59,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | CodeLlama-34B                          |              1.9 |              7.4 |               4 |
 | CodeLlama-7B                           |              2.4 |              9.0 |               4 |
 | DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
+| Magicoder-7B                           |              3.8 |             8.6 |               5 |
 | Mixtral-8×7B                           |              5.6 |             12.4 |               5 |
 | StarCoder2-15B-Instuct                 |              5.6 |             12.4 |               5 |
 | CodeGeeX4-9B*                 |              10.6 |             20.3 |               6 |
