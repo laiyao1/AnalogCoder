@@ -48,7 +48,7 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 |----------------------------------------|-----------------:|-----------------:|----------------:|
 | Llama2-7B                              |              0.0 |              0.0 |               0 |
 | Llama2-13B                             |              0.0 |              0.0 |               0 |
-| SemiKong-8B*                            |              0.1 |              0.7 |               1 |
+| SemiKong-8B*                           |              0.1 |              0.7 |               1 |
 | Llama3-8B                              |              0.1 |              0.7 |               1 |
 | Phi3-14B                               |              0.3 |              1.3 |               1 |
 | Qwen-1.5-110B                          |              0.3 |              1.4 |               2 |
@@ -59,10 +59,11 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | CodeLlama-34B                          |              1.9 |              7.4 |               4 |
 | CodeLlama-7B                           |              2.4 |              9.0 |               4 |
 | DeepSeek-Coder-33B                     |              4.0 |             10.2 |               4 |
+| Llama3.1-8B                            |              4.9 |             12.9 |               4 |
 | Magicoder-7B                           |              3.8 |             8.6 |               5 |
 | Mixtral-8×7B                           |              5.6 |             12.4 |               5 |
 | StarCoder2-15B-Instuct                 |              5.6 |             12.4 |               5 |
-| CodeGeeX4-9B*                 |              10.6 |             20.3 |               6 |
+| CodeGeeX4-9B*                          |              10.6 |             20.3 |               6 |
 | CodeLlama-70B                          |              3.2 |             12.2 |               7 |
 | CodeGemma-7B                           |              6.9 |             17.0 |               7 |
 | WizardCoder-33B                        |              7.1 |             16.9 |               7 |
@@ -81,10 +82,13 @@ In summary, AnalogCoder can significantly improve the labor-intensive chip desig
 | GPT-4o-mini                       |             34.9 |             41.7 |              12 |
 | DeepSeek-V2-Chat                       |             38.6 |             44.3 |              13 |
 | GPT-4 (w/o tool)                       |             51.1 |             57.7 |              14 |
+| Llama3.1-70B                           |             25.4 |             42.6 |             14 |
 | GPT-4o (w/o tool)                      |             54.2 |             58.9 |              15 |
 | Claude-3.5-Sonnet (w/o tool)           |             58.1 |             60.7 |              15 |
+| Mistral-Large-2                         |             28.6 |             51.0 |              17 |
 | Gemini-1.5-Pro                         |             33.9 |             44.6 |              17 |
 | DeepSeek-V2-Coder                      |             56.5 |             69.2 |              19 |
+| Llama3.1-405B                           |             56.9 |             70.7 |             20 |
 | AnalogCoder (GPT 4o-based)             |             66.1 |             75.9 |              20 |
 | AnalogCoder (Claude 3.5 Sonnet-based)  |             76.1 |             86.3 |              22 |
 
