@@ -30,6 +30,7 @@ parser.add_argument("--no_prompt", action="store_true", default=False)
 parser.add_argument("--skill", action="store_true", default=False)
 parser.add_argument("--no_context", action="store_true", default=False)
 parser.add_argument("--no_chain", action="store_true", default=False)
+parser.add_argument("--retrieval", action="store_true", default=True)
 parser.add_argument('--api_key', type=str)
 
 args = parser.parse_args()
@@ -1258,14 +1259,48 @@ def work(task, input, output, task_id, it, background, task_type, flog,
     return money_quota
 
 
+def get_retrieval(task, task_id):
+    prompt = open('retrieval_prompt.md', 'r').read()
+    prompt = prompt.replace('[TASK]', task)
+    messages = [
+            {"role": "system", "content": "You are an analog integrated circuits expert."},
+            {"role": "user", "content": prompt}
+        ]
+    if "gpt" in args.model and args.retrieval:
+        try:
+            completion = client.chat.completions.create(
+                model = args.model,
+                messages = messages,
+                temperature = args.temperature
+            )
+        except openai.APIStatusError as e:
+            print("Encountered an APIStatusError. Details:")
+            print(e)
+            print("sleep 30 seconds")
+            time.sleep(30)
+        answer = completion.choices[0].message.content
+        print("answer", answer)
+        fretre_path = os.path.join(args.model.replace("-", ""), f"p{str(task_id)}", "retrieve.txt")
+        fretre = open(fretre_path, "w")
+        fretre.write(answer)
+        fretre.close()
+        regex = r".*?```.*?\n(.*?)```"
+        matches = re.finditer(regex, answer, re.DOTALL)
+        first_match = next(matches, None)
+        match_res = first_match.group(1)
+        print("match_res", match_res)
+        subcircuits = eval(match_res)
+    else:
+        # use default subcircuits
+        subcircuits = [11]
+    return subcircuits
+
+
+
 def main():
     data_path = 'problem_set.tsv'
     df = pd.read_csv(data_path, delimiter='\t')
     # print(df)
-    if args.task_id >= 16:
-        candidate_path = 'candidate.tsv'
-        df_candidate = pd.read_csv(candidate_path, delimiter='\t')
-        # print(df_candidate)
     # set money cost to $2
     remaining_money = 2
     for index, row in df.iterrows():
@@ -1289,9 +1324,7 @@ def main():
             flog.write("task: {}, it: {}\n".format(circuit_id, it))
             flog.flush()
             if row['Type'] in complex_task_type:
-                df_candidate_row = df_candidate[df_candidate['Id'] == row['Id']]
-                cand_list = eval(df_candidate_row['Candidate'].values[0])
-                subcircuits = cand_list[it%len(cand_list)]
+                subcircuits = get_retrieval(row['Circuit'], args.task_id)
             else:
                 subcircuits = None
             remaining_money = work(row['Circuit'], row['Input'].strip(), row['Output'].strip(), circuit_id, it, 
