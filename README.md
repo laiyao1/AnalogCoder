@@ -1,10 +1,12 @@
 # AnalogCoder: Analog Circuit Design via Training-Free Code Generation
 
+New: Our paper has been accepted by **AAAI'25**.
+
 <p align="center">
   <img src="AnalogCoder_label.png" alt="alt text"width="100">
 </p>
 
-The code implement for paper **AnalogCoder: Analog Circuit Design via Training-Free Code Generation**. 
+The code implemented for AAAI'25 paper **AnalogCoder: Analog Circuit Design via Training-Free Code Generation**. 
 
 [Yao Lai](https://laiyao1.github.io/)<sup>1</sup>, [Sungyoung Lee](https://brianlsy98.github.io/)<sup>2</sup>, [Guojin Chen](https://gjchen.me/)<sup>3</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/)<sup>2</sup>, [Mengkang Hu](https://aaron617.github.io/)<sup>1</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/)<sup>2</sup>, [Ping Luo](http://luoping.me/)<sup>1</sup>.
 
