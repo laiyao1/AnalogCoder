@@ -110,6 +110,7 @@ AnalogCoder requires Python ≥ 3.10, PySpice ≥ 1.5, and openai >= 1.16.1.
 ## Python Install
 ```
 git clone https://github.com/anonyanalog/AnalogCoder
+cd AnalogCoder
 conda env create -f environment.yml
 conda activate analog
 ```
