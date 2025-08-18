@@ -26,6 +26,10 @@ The code implemented for AAAI'25 paper **AnalogCoder: Analog Circuit Design via 
 
 [[Paper](https://arxiv.org/pdf/2405.14918)]
 
+> **🎉 NEW RELEASE!**  
+> An extension version of AnalogCoder **AnalogCoder-Pro** has been released!  
+> [[Paper](https://arxiv.org/abs/2508.02518)] [[Repo](https://github.com/laiyao1/AnalogCoderPro)]
+
 # Introduction
 
 <p align="center">
