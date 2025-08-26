@@ -1,0 +1,3 @@
+ChatCompletion(id=None, choices=None, created=None, model=None, object=None, service_tier=None, system_fingerprint=None, usage=None, error='Unexpected endpoint or method. (POST /chat/completions)')
+----------
+ChatCompletion(id=None, choices=None, created=None, model=None, object=None, service_tier=None, system_fingerprint=None, usage=None, error='Unexpected endpoint or method. (POST /chat/completions)')

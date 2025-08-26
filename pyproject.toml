@@ -1,0 +1,14 @@
+[project]
+name = "analogcoder"
+version = "0.1.0"
+description = "Analog circuit design project"
+requires-python = ">=3.8"
+dependencies = [
+    "matplotlib",
+    "pandas",
+    "numpy",
+    "scipy",
+    "ollama",
+    "openai",
+    "pyspice==1.5"
+]

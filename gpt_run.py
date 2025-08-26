@@ -19,7 +19,7 @@ def signal_handler(signum, frame):
     raise TimeoutException("timeout")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default="gpt-3.5-turbo")
+parser.add_argument('--model', type=str, default=None)
 parser.add_argument('--temperature', type=float, default=0.5)
 parser.add_argument('--num_per_task', type=int, default=15)
 parser.add_argument('--num_of_retry', type=int, default=3)
@@ -32,8 +32,49 @@ parser.add_argument("--no_context", action="store_true", default=False)
 parser.add_argument("--no_chain", action="store_true", default=False)
 parser.add_argument("--retrieval", action="store_true", default=True)
 parser.add_argument('--api_key', type=str)
+parser.add_argument('--openai_url', type=str, default=None, help='Override OpenAI API base URL (e.g. https://proxy.example/v1)')
 
 args = parser.parse_args()
+
+# Load .env (if present) and parse minimal keys: OPENAI_MODEL, OPENAI_URL
+env_path = os.path.join(os.getcwd(), '.env')
+env_vars = {}
+if os.path.exists(env_path):
+    try:
+        with open(env_path, 'r', encoding='utf-8') as ef:
+            for line in ef:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                if '=' in line:
+                    k, v = line.split('=', 1)
+                    k = k.strip()
+                    v = v.strip().strip('"').strip("'")
+                    env_vars[k] = v
+    except Exception:
+        # silently ignore .env parsing errors (non-essential)
+        env_vars = {}
+
+# Precedence: CLI args -> .env -> defaults
+MODEL_DEFAULT = "gpt-3.5-turbo"
+if getattr(args, 'model', None) is None:
+    args.model = env_vars.get('OPENAI_MODEL', MODEL_DEFAULT)
+else:
+    # ensure model is exposed to env for downstream use
+    os.environ['OPENAI_MODEL'] = args.model
+
+if getattr(args, 'openai_url', None) is None:
+    args.openai_url = env_vars.get('OPENAI_URL', None)
+else:
+    os.environ['OPENAI_URL'] = args.openai_url
+
+# If an OpenAI base URL is provided, configure the openai client to use it
+if args.openai_url:
+    try:
+        openai.api_base = args.openai_url
+    except Exception:
+        # fallback to env var for other libraries that read it
+        os.environ['OPENAI_API_BASE'] = args.openai_url
 
 opensource_models = ["mistral", "wizardcoder", "deepseek-coder:33b-instruct", "codeqwen", "mixtral", "qwen"]
 
@@ -99,9 +140,14 @@ circuit.SinusoidalVoltageSource('sin', 'Vin', circuit.gnd,
 global client
 
 
-if "gpt" in args.model:
+if getattr(args, 'openai_url', None):
+    # If user provided an OpenAI-compatible URL, always construct the client to use it
+    client = OpenAI(api_key=args.api_key, base_url=args.openai_url)
+elif args.model and "gpt" in args.model:
+    # prefer CLI arg model when it contains 'gpt'
     client = OpenAI(api_key=args.api_key)
-elif "deepseek-chat" in args.model:
+elif args.model and "deepseek-chat" in args.model:
+    # deepseek has a fixed base URL in this codepath
     client = OpenAI(api_key=args.api_key, base_url="https://api.deepseek.com/v1")
 else:
     client = None
@@ -135,6 +181,20 @@ def extract_code(generated_content):
             break
 
     return empty_code_error, new_code
+
+
+def extract_completion_text(completion):
+    """Return assistant text from various completion object shapes."""
+    try:
+        return completion.choices[0].message.content
+    except Exception:
+        try:
+            return completion['message']['content']
+        except Exception:
+            try:
+                return completion['choices'][0]['message']['content']
+            except Exception:
+                return str(completion)
 
 
 
@@ -832,10 +892,8 @@ def work(task, input, output, task_id, it, background, task_type, flog,
     elif "gpt-4" in args.model:
         money_quota -= (completion.usage.prompt_tokens / 1e6 * 10) + (completion.usage.completion_tokens / 1e6 * 30)
 
-    if "gpt" in args.model or "deepseek-chat" in args.model:
-        answer = completion.choices[0].message.content
-    else:
-        answer = completion['message']['content']
+    # Extract answer using helper which handles multiple client shapes
+    answer = extract_completion_text(completion)
 
     if "ft:gpt-3.5" in args.model:
         if "a:9HyyBpNI" in args.model:
@@ -1218,37 +1276,33 @@ def work(task, input, output, task_id, it, background, task_type, flog,
         elif "gpt-4" in args.model:
             money_quota -= (completion.usage.prompt_tokens / 1e6 * 10) + (completion.usage.completion_tokens / 1e6 * 30)
 
-        fwrite_input.write("\n----------\n")
-        fwrite_input.write(new_prompt)
-        fwrite_input.flush()
+    fwrite_input.write("\n----------\n")
+    fwrite_input.write(new_prompt)
+    fwrite_input.flush()
 
-        if "gpt" in args.model or "deepseek-chat" in args.model:
-            answer = completion.choices[0].message.content
+    answer = extract_completion_text(completion)
+
+    fwrite_output.write("\n----------\n")
+    fwrite_output.write(answer)
+
+    empty_code_error, code = extract_code(answer)
+
+    operating_point_path = "{}/p{}/{}/p{}_{}_{}_op.txt".format(model_dir, task_id, it, task_id, it, code_id)
+    if "simulator = circuit.simulator()" not in code:
+        code += "\nsimulator = circuit.simulator()\n"
+    if task_type not in complex_task_type:
+        code += pyspice_template.replace("[OP_PATH]", operating_point_path)
+    else:
+        figure_path = "{}/p{}/{}/p{}_{}_{}_figure".format(model_dir, task_id, it, task_id, it, code_id)
+        if task_type == "Oscillator":
+            code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path)
         else:
-            answer = completion['message']['content']
-
-        fwrite_output.write("\n----------\n")
-        fwrite_output.write(answer)
-
-        empty_code_error, code = extract_code(answer)
-
-
-        operating_point_path = "{}/p{}/{}/p{}_{}_{}_op.txt".format(model_dir, task_id, it, task_id, it, code_id)
-        if "simulator = circuit.simulator()" not in code:
-            code += "\nsimulator = circuit.simulator()\n"
-        if task_type not in complex_task_type:
-            code += pyspice_template.replace("[OP_PATH]", operating_point_path)
-        else:
-            figure_path = "{}/p{}/{}/p{}_{}_{}_figure".format(model_dir, task_id, it, task_id, it, code_id)
-            if task_type == "Oscillator":
-                code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path)
+            if args.skill:
+                code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path).replace('[BIAS_VOLTAGE]', str(bias_voltage))
             else:
-                if args.skill:
-                    code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path).replace('[BIAS_VOLTAGE]', str(bias_voltage))
-                else:
-                    code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path).replace('[BIAS_VOLTAGE]', "float(circuit.element(vin_name).dc_value)")
-            if "import math" not in code:
-                code = "import math\n" + code
+                code += pyspice_template_complex.replace("[FIGURE_PATH]", figure_path).replace('[BIAS_VOLTAGE]', "float(circuit.element(vin_name).dc_value)")
+        if "import math" not in code:
+            code = "import math\n" + code
     
     # save messages
     fwrite = open('{}/p{}/{}/p{}_{}_messages.txt'.format(model_dir, task_id, it, task_id, it), 'w')
@@ -1278,7 +1332,7 @@ def get_retrieval(task, task_id):
             print(e)
             print("sleep 30 seconds")
             time.sleep(30)
-        answer = completion.choices[0].message.content
+        answer = extract_completion_text(completion)
         print("answer", answer)
         fretre_path = os.path.join(args.model.replace("-", ""), f"p{str(task_id)}", "retrieve.txt")
         fretre = open(fretre_path, "w")
