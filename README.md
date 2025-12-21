@@ -162,3 +162,7 @@ If you find our work beneficial, we would be grateful if you considered citing o
       primaryClass={cs.LG}
 }
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=laiyao1/AnalogCoder&type=date&legend=top-left)](https://www.star-history.com/#laiyao1/AnalogCoder&type=date&legend=top-left)
