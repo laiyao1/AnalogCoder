@@ -1,6 +1,6 @@
 # AnalogCoder: Analog Circuit Design via Training-Free Code Generation
 
-New: Our paper has been accepted by **AAAI'25**.
+New: Our paper has been accepted by **AAAI'25** as **Oral Presentation (Top 5%)** and selected as **AAAI 2025 Top-15 Influential Papers (Rank 11)**.
 
 <p align="center">
   <img src="AnalogCoder_label.png" alt="alt text"width="100">
@@ -22,7 +22,10 @@ The code implemented for AAAI'25 paper **AnalogCoder: Analog Circuit Design via 
     <img src="utda.jpg" alt="Image 2" style="width: 20%;"/>
   </a>
 
+## 🏆 Highlights
 
+- **AAAI'25 Oral Presentation** (Top 5%)
+- **AAAI 2025 Top-15 Influential Papers** ([Rank 11](https://resources.paperdigest.org/2025/09/most-influential-aaai-papers-2025-09-version/))
 
 [[Paper](https://arxiv.org/pdf/2405.14918)]
 
