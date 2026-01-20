@@ -14,7 +14,7 @@ The code implemented for AAAI'25 paper **AnalogCoder: Analog Circuit Design via 
 <sup>2</sup> The University of Texas at Austin,
 <sup>3</sup> The Chinese University of Hong Kong.
 
-  <a href="https://mmlab-hku.com/" target="_blank">
+  <a href="https://mmlab.hk/" target="_blank">
     <img src="hkummlab.png" alt="Image 1" style="width: 30%;"/>
   </a>
 
