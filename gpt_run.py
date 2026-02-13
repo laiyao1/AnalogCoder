@@ -843,16 +843,17 @@ def work(task, input, output, task_id, it, background, task_type, flog,
                 time.sleep(30)
 
 
-    if "gpt" in args.model:
+    # Only GPT models have usage attribute
+    if "gpt" in args.model and hasattr(completion, 'usage'):
         total_tokens += completion.usage.total_tokens
         total_prompt_tokens += completion.usage.prompt_tokens
         total_completion_tokens += completion.usage.completion_tokens
 
-    if "ft:gpt-3.5" in args.model:
+    if "ft:gpt-3.5" in args.model and hasattr(completion, 'usage'):
         money_quota -= (completion.usage.prompt_tokens / 1e6 * 3) + (completion.usage.completion_tokens / 1e6 * 6)
-    elif "gpt-3" in args.model:
+    elif "gpt-3" in args.model and hasattr(completion, 'usage'):
         money_quota -= (completion.usage.prompt_tokens / 1e6 * 0.5) + (completion.usage.completion_tokens / 1e6 * 1.5)
-    elif "gpt-4" in args.model:
+    elif "gpt-4" in args.model and hasattr(completion, 'usage'):
         money_quota -= (completion.usage.prompt_tokens / 1e6 * 10) + (completion.usage.completion_tokens / 1e6 * 30)
 
     if "gpt" in args.model or "deepseek-chat" in args.model:
@@ -1094,22 +1095,28 @@ def work(task, input, output, task_id, it, background, task_type, flog,
                         print("CODE_PATH = {}".format(code_path))
                         os.rename(code_path, code_path.rsplit(".", 1)[0] + "_success.py")
                         if is_opensource_model(args.model):
+                            # Opensource models don't have usage attribute
+                            flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\n".format(task_id, it, code_id))
+                        elif hasattr(completion, 'usage'):
                             flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\tcompletion_tokens:{}"
                                         "\tprompt_tokens:{}\ttotal_tokens:{}\n".format(task_id, it, code_id,
                                         completion.usage.completion_tokens,
                                         completion.usage.prompt_tokens,
                                         completion.usage.total_tokens))
-                            flog.write("total_tokens\t{}\ttotal_prompt_tokens\t{}\ttotal_completion_tokens\t{}\n".format(total_tokens, total_prompt_tokens, total_completion_tokens))
-                            ftmp_write = open(f'{model_dir}/p{task_id}/{it}/token_info_{total_tokens}_{total_prompt_tokens}_{total_completion_tokens}_{code_id}', 'w')
-                            ftmp_write.close()
                         else:
                             flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\n".format(task_id, it, code_id))
+                        flog.write("total_tokens\t{}\ttotal_prompt_tokens\t{}\ttotal_completion_tokens\t{}\n".format(total_tokens, total_prompt_tokens, total_completion_tokens))
+                        ftmp_write = open(f'{model_dir}/p{task_id}/{it}/token_info_{total_tokens}_{total_prompt_tokens}_{total_completion_tokens}_{code_id}', 'w')
+                        ftmp_write.close()
                         flog.write("money_quota\t{:.10f}\n".format(money_quota))
                         flog.flush()
                         break
             else:
                 os.rename(code_path, code_path.rsplit(".", 1)[0]+"_success.py")
-                if not is_opensource_model(args.model):
+                if is_opensource_model(args.model):
+                    # Opensource models don't have usage attribute
+                    flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\n".format(task_id, it, code_id))
+                elif hasattr(completion, 'usage'):
                     flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\tcompletion_tokens:{}"
                                 "\tprompt_tokens:{}\ttotal_tokens:{}\n".format(task_id, it, code_id,
                                 completion.usage.completion_tokens,
@@ -1230,16 +1237,16 @@ def work(task, input, output, task_id, it, background, task_type, flog,
                 print("sleep 30 seconds")
                 time.sleep(30)
 
-        if "gpt" in args.model:
+        if "gpt" in args.model and hasattr(completion, 'usage'):
             total_tokens += completion.usage.total_tokens
             total_prompt_tokens += completion.usage.prompt_tokens
             total_completion_tokens += completion.usage.completion_tokens
 
-        if "ft:gpt-3.5" in args.model:
+        if "ft:gpt-3.5" in args.model and hasattr(completion, 'usage'):
             money_quota -= (completion.usage.prompt_tokens / 1e6 * 3) + (completion.usage.completion_tokens / 1e6 * 6)
-        elif "gpt-3" in args.model:
+        elif "gpt-3" in args.model and hasattr(completion, 'usage'):
             money_quota -= (completion.usage.prompt_tokens / 1e6 * 0.5) + (completion.usage.completion_tokens / 1e6 * 1.5)
-        elif "gpt-4" in args.model:
+        elif "gpt-4" in args.model and hasattr(completion, 'usage'):
             money_quota -= (completion.usage.prompt_tokens / 1e6 * 10) + (completion.usage.completion_tokens / 1e6 * 30)
 
         fwrite_input.write("\n----------\n")
