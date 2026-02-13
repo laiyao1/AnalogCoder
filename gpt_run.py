@@ -35,10 +35,33 @@ parser.add_argument('--api_key', type=str)
 
 args = parser.parse_args()
 
-opensource_models = ["mistral", "wizardcoder", "deepseek-coder:33b-instruct", "codeqwen", "mixtral", "qwen"]
+# 更灵活的开源模型判断函数
+def is_opensource_model(model_name):
+    """
+    Check if the model is an open-source model that uses ollama.
+    Returns True if any opensource keyword is found in the model name (case-insensitive).
+    """
+    opensource_keywords = [
+        "mistral", 
+        "wizard", 
+        "deepseek-coder",
+        "codeqwen",
+        "qwen",
+        "mixtral", 
+        "llama",
+        "codellama",
+        "phi",
+        "gemma",
+        "vicuna",
+        "alpaca"
+    ]
+    model_lower = model_name.lower()
+    return any(keyword in model_lower for keyword in opensource_keywords)
 
-if any([model in args.model for model in opensource_models]):
+# 根据模型类型导入ollama
+if is_opensource_model(args.model):
     import ollama
+    
 if args.skill:
     args.num_of_retry = min(2, args.num_of_retry)
 
@@ -718,7 +741,7 @@ def work(task, input, output, task_id, it, background, task_type, flog,
             fopen = open('prompt_template.md','r')
         elif args.ngspice:
             fopen = open('prompt_template_ngspice.md','r')
-        elif any(model in args.model for model in opensource_models):
+        elif is_opensource_model(args.model):
             fopen = open('prompt_template.md','r')
         else:
             fopen = open('prompt_template.md','r')
@@ -780,7 +803,7 @@ def work(task, input, output, task_id, it, background, task_type, flog,
         return money_quota
 
     while retry:
-        if any(model in args.model for model in opensource_models):
+        if is_opensource_model(args.model):
             print(f"start {args.model} completion")
             signal.signal(signal.SIGALRM, signal_handler)
             signal.alarm(360)
@@ -852,8 +875,9 @@ def work(task, input, output, task_id, it, background, task_type, flog,
         model_dir = 'gpt4'
     elif "deepseek-chat" in args.model:
         model_dir = "deepseek2"
-    elif any(model in args.model for model in opensource_models):
-        model_dir = str(args.model).replace(":", "-")
+    elif is_opensource_model(args.model):
+        # 更灵活的模型目录名生成
+        model_dir = str(args.model).replace(":", "-").replace("/", "-")
     else:
         model_dir = 'unknown'
     
@@ -1069,7 +1093,7 @@ def work(task, input, output, task_id, it, background, task_type, flog,
                         # completion
                         print("CODE_PATH = {}".format(code_path))
                         os.rename(code_path, code_path.rsplit(".", 1)[0] + "_success.py")
-                        if any(model in args.model for model in opensource_models):
+                        if is_opensource_model(args.model):
                             flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\tcompletion_tokens:{}"
                                         "\tprompt_tokens:{}\ttotal_tokens:{}\n".format(task_id, it, code_id,
                                         completion.usage.completion_tokens,
@@ -1085,7 +1109,7 @@ def work(task, input, output, task_id, it, background, task_type, flog,
                         break
             else:
                 os.rename(code_path, code_path.rsplit(".", 1)[0]+"_success.py")
-                if "llama" not in args.model and "wizard" not in args.model and "deepseek" not in args.model and "mistral" not in args.model and "qwencode" not in args.model and "mixtral" not in args.model:
+                if not is_opensource_model(args.model):
                     flog.write("task:{}\tit:{}\tcode_id:{}\tsuccess.\tcompletion_tokens:{}"
                                 "\tprompt_tokens:{}\ttotal_tokens:{}\n".format(task_id, it, code_id,
                                 completion.usage.completion_tokens,
@@ -1169,7 +1193,7 @@ def work(task, input, output, task_id, it, background, task_type, flog,
         retry = True
         while retry:
             try:
-                if any(model in args.model for model in opensource_models):
+                if is_opensource_model(args.model):
                     print(f"start {args.model} completion")
                     signal.signal(signal.SIGALRM, signal_handler)
                     signal.alarm(360)
