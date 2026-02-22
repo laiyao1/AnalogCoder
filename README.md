@@ -257,5 +257,5 @@ If you find this work useful, please cite:
 
 ## Star History
 
-[![Star History Chart][image_0]](https://www.star-history.com/#laiyao1/AnalogCoder&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=laiyao1/AnalogCoder&type=date&legend=top-left)](https://www.star-history.com/#laiyao1/AnalogCoder&type=date&legend=top-left)
 ```
