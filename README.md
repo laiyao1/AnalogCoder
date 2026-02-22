@@ -243,13 +243,15 @@ python gpt_run.py --model qwen3-coder --task_id=1
 If you find this work useful, please cite:
 
 ```bibtex
-@misc{lai2024analogcoder,
-  title={AnalogCoder: Analog Circuit Design via Training-Free Code Generation},
-  author={Yao Lai and Sungyoung Lee and Guojin Chen and Souradip Poddar and Mengkang Hu and David Z. Pan and Ping Luo},
-  year={2024},
-  eprint={2405.14918},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
+@article{lai2025analogcoder,
+    title={AnalogCoder: Analog Circuit Design via Training-Free Code Generation},
+    volume={39},
+    DOI={10.1609/aaai.v39i1.32016},
+    number={1},
+    journal={Proceedings of the AAAI Conference on Artificial Intelligence},
+    author={Lai, Yao and Lee, Sungyoung and Chen, Guojin and Poddar, Souradip and Hu, Mengkang and Pan, David Z. and Luo, Ping},
+    year={2025},
+    pages={379-387}
 }
 ```
 
